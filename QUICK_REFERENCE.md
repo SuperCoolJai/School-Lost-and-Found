@@ -3,7 +3,8 @@
 ## Admin Credentials
 
 ```
-👤 Username: schooladmin
+👤 Username: (kept private)  
+_Note: username/password are stored in the admin configuration file and are not displayed on the public admin page._
 🔐 Password: L0st&F0und#2026Secure!
 ```
 
