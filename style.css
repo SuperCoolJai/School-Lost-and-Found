@@ -151,7 +151,7 @@ p {
 }
 
 .lost-found-sign {
-  width: 200px;
+  width: 120px;
   height: auto;
   max-width: 100%;
   animation: swing 2s ease-in-out infinite;
