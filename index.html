@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Lost & Found</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- EmailJS for notifications -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+</head>
+<body>
+  <!-- Sparkling stars background -->
+  <div class="stars-container"></div>
+
+  <header>
+    <h1>⭐ School Lost & Found ⭐</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#items">Items</a>
+      <a href="#report">Report</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <h2>Lost Something? Found Something?</h2>
+        <p>Help reunite lost items with their owners!</p>
+      </div>
+    </section>
+
+    <!-- Search Section -->
+    <section id="search-section" class="search-section">
+      <h2>Search Items</h2>
+      <div class="search-controls">
+        <input type="text" id="searchInput" placeholder="Search by name or description...">
+        <select id="statusFilter">
+          <option value="all">All Items</option>
+          <option value="Lost">Lost Items</option>
+          <option value="Found">Found Items</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Items Display Section -->
+    <section id="items" class="items-section">
+      <h2>Found & Lost Items</h2>
+      <div id="itemsList" class="items-grid"></div>
+    </section>
+
+    <!-- Report Item Form Section -->
+    <section id="report" class="report-section">
+      <h2>Report a Found Item</h2>
+      <form id="itemForm" class="form">
+        <div class="form-group">
+          <label for="itemName">Item Name *</label>
+          <input type="text" id="itemName" required placeholder="e.g., Blue Backpack">
+        </div>
+
+        <div class="form-group">
+          <label for="itemDescription">Description *</label>
+          <textarea id="itemDescription" required placeholder="Describe the item in detail..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="itemStatus">Status *</label>
+          <select id="itemStatus" required>
+            <option value="Found">Found Item</option>
+            <option value="Lost">Lost Item</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="itemPhoto">Upload Photo</label>
+          <input type="file" id="itemPhoto" accept="image/*">
+          <div id="photoPreviewContainer" class="photo-preview-container">
+            <img id="photoPreview" alt="Preview" class="photo-preview" style="display:none;">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Save Item</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Claim Modal -->
+  <div id="claimModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeClaimModal()">&times;</span>
+      <h2>Claim This Item</h2>
+      <p id="claimItemName"></p>
+      <form id="claimForm">
+        <input type="text" id="claimName" placeholder="Your Name" required>
+        <input type="email" id="claimEmail" placeholder="Your Email" required>
+        <button type="submit" class="btn-primary">Submit Claim</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <h2>✓ Success!</h2>
+      <p id="successMessage"></p>
+      <button onclick="closeSuccessModal()" class="btn-primary">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>School Lost & Found System – 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

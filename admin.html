@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin – Lost and Found</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- EmailJS for email notifications -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+</head>
+<body>
+  <!-- Sparkling stars background -->
+  <div class="stars-container"></div>
+
+  <header>
+    <h1>⭐ Admin Control Panel ⭐</h1>
+    <nav>
+      <a href="index.html">Back to Public Site</a>
+      <a href="#" id="logoutBtn" style="display: none;">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Login Section -->
+    <section id="loginSection" class="login-container">
+      <div class="login-card">
+        <div class="login-header">
+          <h1>🔐 Admin Access</h1>
+          <p>Lost & Found Management System</p>
+        </div>
+        
+        <form id="adminLoginForm" class="login-form">
+          <div class="form-group">
+            <label for="adminUsername">👤 Username</label>
+            <input 
+              type="text" 
+              id="adminUsername" 
+              name="username" 
+              placeholder="Enter your username" 
+              required
+              autocomplete="username"
+            >
+            <small class="hint">Username: <code>schooladmin</code></small>
+          </div>
+
+          <div class="form-group">
+            <label for="adminPassword">🔐 Password</label>
+            <input 
+              type="password" 
+              id="adminPassword" 
+              name="password" 
+              placeholder="Enter your password" 
+              required
+              autocomplete="current-password"
+            >
+            <small class="hint">Contact administrator for credentials</small>
+          </div>
+
+          <button type="submit" class="btn-login">Sign In →</button>
+
+          <div id="loginError" class="login-error" style="display: none;"></div>
+        </form>
+
+        <div class="login-footer">
+          <p>🏫 School Lost & Found System</p>
+          <small>Secure Admin Login</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Dashboard (hidden until login) -->
+    <div id="adminDashboard" style="display: none;">
+      
+      <!-- 🔴 TOP PRIORITY: Approve/Decline Claims Section -->
+      <section class="admin-section priority-1">
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+          <span style="font-size: 28px;">🔴</span>
+          <div>
+            <h2 style="margin: 0; color: #ff6b6b;">Accept/Deny User Claims</h2>
+            <p style="margin: 5px 0 0 0; color: #ffed4e; font-size: 13px;">TOP PRIORITY - Review and approve/deny items users claimed</p>
+          </div>
+        </div>
+        <div id="adminClaimsList" class="admin-list"></div>
+      </section>
+
+      <!-- 🟡 SECOND PRIORITY: Add & Delete Items Section -->
+      <section class="admin-section priority-2">
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+          <span style="font-size: 28px;">🟡</span>
+          <div>
+            <h2 style="margin: 0;">Manage Inventory</h2>
+            <p style="margin: 5px 0 0 0; color: #cccccc; font-size: 13px;">SECOND PRIORITY - Add new items and delete returned ones</p>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+          <!-- Add Item Form -->
+          <div>
+            <h3>➕ Add New Item</h3>
+            <form id="adminAddItemForm">
+              <div class="form-group">
+                <label for="itemName">Item Name:</label>
+                <input type="text" id="itemName" placeholder="e.g., Blue Backpack" required>
+              </div>
+              <div class="form-group">
+                <label for="itemDescription">Description:</label>
+                <textarea id="itemDescription" placeholder="Describe the item..." required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="itemStatus">Status:</label>
+                <select id="itemStatus" required>
+                  <option value="Found">Found</option>
+                  <option value="Lost">Lost</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="itemPhoto">Photo (optional):</label>
+                <input type="file" id="itemPhoto" accept="image/*">
+              </div>
+              <button type="submit" class="btn-primary" style="width: 100%;">Add Item</button>
+            </form>
+          </div>
+
+          <!-- Items List for Deletion -->
+          <div>
+            <h3>❌ Delete Returned Items</h3>
+            <div id="adminItemsList" class="admin-list" style="max-height: 400px; overflow-y: auto;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 🚨 EMERGENCY: Delete All Items -->
+      <section class="admin-section priority-emergency" style="border-left: 6px solid #ff0000; background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 50, 50, 0.1));">
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+          <span style="font-size: 32px;">🚨</span>
+          <div>
+            <h2 style="margin: 0; color: #ff0000;">EMERGENCY - Nuclear Option</h2>
+            <p style="margin: 5px 0 0 0; color: #ffaaaa; font-size: 13px;">⚠️ DELETE ENTIRE DATABASE (Cannot be undone!)</p>
+          </div>
+        </div>
+        <div style="background-color: rgba(255, 0, 0, 0.15); padding: 20px; border-radius: 8px; border-left: 4px solid #ff0000;">
+          <p style="margin-top: 0; color: #ffaaaa;"><strong>Warning:</strong> This will delete ALL items and ALL claims from the system. This action cannot be undone!</p>
+          <button id="clearDbBtn" class="btn-delete" style="padding: 16px 32px; font-size: 16px; font-weight: bold; width: 100%;">🚨 DELETE ALL ITEMS - EMERGENCY ONLY 🚨</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Admin Panel – School Lost & Found System – 2026</p>
+  </footer>
+
+  <script>
+    // Add sparkles to admin panel too
+    function createAdminSparkles() {
+      const container = document.querySelector('.stars-container');
+      if (!container) return;
+      for (let i = 0; i < 30; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        container.appendChild(star);
+      }
+    }
+    
+    window.addEventListener('load', createAdminSparkles);
+  </script>
+
+  <!-- EmailJS SDK (initialization) -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+  <script>
+    // Initialize EmailJS with provided public key
+    if (typeof emailjs !== 'undefined' && emailjs.init) {
+      try { emailjs.init('nC3gM3Wjq5JNhD9SO'); } catch (e) { console.warn('EmailJS init failed', e); }
+    }
+  </script>
+
+  <script src="admin.js"></script>
+</body>
+</html>
