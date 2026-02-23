@@ -139,7 +139,7 @@ p {
 .hero {
   background: linear-gradient(135deg, rgba(20, 95, 176, 0.95), rgba(26, 108, 201, 0.95));
   text-align: center;
-  padding: 20px 30px;
+  padding: 30px 30px;
   border-radius: 16px;
 }
 
@@ -151,7 +151,7 @@ p {
 }
 
 .lost-found-sign {
-  width: 30px;
+  width: 100px;
   height: auto;
   max-width: 100%;
   animation: swing 2s ease-in-out infinite;
