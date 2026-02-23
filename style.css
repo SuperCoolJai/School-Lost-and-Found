@@ -143,10 +143,35 @@ p {
   border-radius: 16px;
 }
 
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.lost-found-sign {
+  width: 200px;
+  height: auto;
+  max-width: 100%;
+  animation: swing 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 237, 74, 0.5));
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
 .hero-content h2 {
   font-size: 48px;
   margin-bottom: 20px;
   animation: float 3s ease-in-out infinite;
+  margin-top: 0;
 }
 
 .hero-content p {
